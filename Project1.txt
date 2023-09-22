@@ -1,0 +1,19 @@
+Node1
+Public address of the key:   0x21C091A8c6920006872E89A1eBF763836b9ffEdD
+Path of the secret key file: data\keystore\UTC--2021-03-31T14-45-55.806114600Z--21c091a8c6920006872e89a1ebf763836b9ffedd
+Password: 12345
+
+Node 2
+Public address of the key:   0xDFA2Bdf4655C3376426A36c6A9C0ecf7b58AF5bE
+Path of the secret key file: data\keystore\UTC--2021-03-31T14-46-36.576982800Z--dfa2bdf4655c3376426a36c6a9c0ecf7b58af5be
+Pass: 12345
+
+geth --datadir ./data init ../blockpoa.json
+
+enode://c4c7a4668cedf41eda4571b9979432182cd282925a254b5183318c2dc0a7e2f2b1861f83ba140a658c836bd28c6837b88c36c99d570c11953f2e28e66f858e1b@127.0.0.1:0?discport=30301
+
+bootnode: bootnode -nodekey "./boot.key" -verbosity 7 -addr "127.0.0.1:30301"
+
+node1: geth --networkid 14333 --datadir "./data" --bootnodes enode://c4c7a4668cedf41eda4571b9979432182cd282925a254b5183318c2dc0a7e2f2b1861f83ba140a658c836bd28c6837b88c36c99d570c11953f2e28e66f858e1b@127.0.0.1:0?discport=30301 --port 30303 --ipcdisable --syncmode full --rpc --allow-insecure-unlock --rpccorsdomain "*" --rpcport 8545 --unlock 0x21C091A8c6920006872E89A1eBF763836b9ffEdD --password password.txt --mine console
+
+node2: geth --networkid 14333 --datadir "./data" --bootnodes enode://c4c7a4668cedf41eda4571b9979432182cd282925a254b5183318c2dc0a7e2f2b1861f83ba140a658c836bd28c6837b88c36c99d570c11953f2e28e66f858e1b@127.0.0.1:0?discport=30301 --port 30304 --ipcdisable --syncmode full --rpc --allow-insecure-unlock --rpccorsdomain "*" --rpcport 8546 --unlock 0xDFA2Bdf4655C3376426A36c6A9C0ecf7b58AF5bE --password password.txt console
